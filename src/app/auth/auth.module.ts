@@ -15,4 +15,4 @@ const routes: Routes = [
   declarations: [AuthComponent],
   imports: [CommonModule, ReactiveFormsModule, RouterModule.forChild(routes)],
 })
-export class AuthModule { }
+export class AuthModule {}
