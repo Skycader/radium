@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { registerAction } from '../../store/actions/register.action';
+import {Component} from '@angular/core'
+import {FormBuilder, FormGroup, Validators} from '@angular/forms'
+import {Store} from '@ngrx/store'
+import {registerAction} from '../../store/actions/register.action'
 
 @Component({
   selector: 'app-auth',
@@ -9,7 +9,7 @@ import { registerAction } from '../../store/actions/register.action';
   styleUrl: './auth.component.scss',
 })
 export class AuthComponent {
-  form!: FormGroup;
+  form!: FormGroup
 
   constructor(
     private fb: FormBuilder,
@@ -17,7 +17,7 @@ export class AuthComponent {
   ) {}
 
   ngOnInit(): void {
-    this.initializeForm();
+    this.initializeForm()
   }
 
   initializeForm(): void {
@@ -25,11 +25,11 @@ export class AuthComponent {
       username: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
-    });
+    })
   }
 
   onSubmit(): void {
-    console.log('submit', this.form.value, this.form.valid);
-    this.store.dispatch(registerAction(this.form.value));
+    console.log('submit', this.form.value, this.form.valid)
+    this.store.dispatch(registerAction(this.form.value))
   }
 }
