@@ -1,7 +1,10 @@
 import {Component} from '@angular/core'
 import {FormBuilder, FormGroup, Validators} from '@angular/forms'
-import {Store} from '@ngrx/store'
+import {Store, select} from '@ngrx/store'
 import {registerAction} from '../../store/actions/register.action'
+import {Observable} from 'rxjs'
+import {AppStateInterface} from '../../../../shared/models/appState.interface'
+import {isSubmittingSelector} from '../../store/selectors'
 
 @Component({
   selector: 'app-auth',
@@ -10,14 +13,19 @@ import {registerAction} from '../../store/actions/register.action'
 })
 export class AuthComponent {
   form!: FormGroup
-
+  isSubmitting$!: Observable<Boolean>
   constructor(
     private fb: FormBuilder,
-    private store: Store,
+    private store: Store<AppStateInterface>,
   ) {}
 
   ngOnInit(): void {
     this.initializeForm()
+    this.initializeValues()
+  }
+
+  public initializeValues(): void {
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector))
   }
 
   initializeForm(): void {
