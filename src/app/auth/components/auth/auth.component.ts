@@ -1,13 +1,12 @@
-import { Component } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { Store, select } from '@ngrx/store'
-import {
-  registerAction,
-  registerActionSuccess,
-} from '../../store/actions/register.action'
-import { Observable } from 'rxjs'
-import { AppStateInterface } from '../../../../shared/models/appState.interface'
-import { isSubmittingSelector } from '../../store/selectors'
+import {Component} from '@angular/core'
+import {FormBuilder, FormGroup, Validators} from '@angular/forms'
+import {Store, select} from '@ngrx/store'
+import {registerAction} from '../../store/actions/register.action'
+import {Observable} from 'rxjs'
+import {AppStateInterface} from '../../../../shared/models/appState.interface'
+import {isSubmittingSelector} from '../../store/selectors'
+import {AuthService} from '../../services/auth.service'
+import {RegisterRequestInterface} from '../../models/registerRequest.interface'
 
 @Component({
   selector: 'app-auth',
@@ -20,7 +19,8 @@ export class AuthComponent {
   constructor(
     private fb: FormBuilder,
     private store: Store<AppStateInterface>,
-  ) { }
+    private authService: AuthService,
+  ) {}
 
   ngOnInit(): void {
     this.initializeForm()
@@ -40,10 +40,10 @@ export class AuthComponent {
   }
 
   onSubmit(): void {
-    console.log('submit', this.form.value, this.form.valid)
-    this.store.dispatch(registerAction(this.form.value))
-    setTimeout(() => {
-      this.store.dispatch(registerActionSuccess(this.form.value))
-    }, 3000)
+    const request: RegisterRequestInterface = {
+      user: this.form.value,
+    }
+
+    this.store.dispatch(registerAction({request}))
   }
 }

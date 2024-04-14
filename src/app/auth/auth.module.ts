@@ -5,6 +5,9 @@ import {RouterModule, Routes} from '@angular/router'
 import {ReactiveFormsModule} from '@angular/forms'
 import {StoreModule} from '@ngrx/store'
 import {reducer} from './store/reducer'
+import {EffectsModule} from '@ngrx/effects'
+import {RegisterEffect} from './store/effects/register.effect'
+import {HttpClientModule} from '@angular/common/http'
 
 const routes: Routes = [
   {
@@ -17,9 +20,11 @@ const routes: Routes = [
   declarations: [AuthComponent],
   imports: [
     CommonModule,
+    HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('auth', reducer),
+    EffectsModule.forFeature([RegisterEffect]),
   ],
 })
 export class AuthModule {}
