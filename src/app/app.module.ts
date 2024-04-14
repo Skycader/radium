@@ -24,6 +24,7 @@ import {EffectsModule} from '@ngrx/effects'
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
+      trace: environment.production,
     }),
   ],
   providers: [provideClientHydration()],

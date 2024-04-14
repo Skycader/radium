@@ -1,13 +1,14 @@
-import {Injectable} from '@angular/core'
-import {Actions, createEffect, ofType} from '@ngrx/effects'
-import {AuthService} from '../../services/auth.service'
+import { Injectable } from '@angular/core'
+import { Actions, createEffect, ofType } from '@ngrx/effects'
+import { AuthService } from '../../services/auth.service'
 import {
   registerAction,
   registerFailureAction,
   registerSuccessAction,
 } from '../actions/register.action'
-import {catchError, map, of, switchMap, tap} from 'rxjs'
-import {CurrentUserInterface} from '../../../../shared/models/currentUser.interface'
+import { catchError, map, of, switchMap, tap } from 'rxjs'
+import { CurrentUserInterface } from '../../../../shared/models/currentUser.interface'
+import { HttpErrorResponse } from '@angular/common/http'
 
 @Injectable()
 export class RegisterEffect {
@@ -15,13 +16,15 @@ export class RegisterEffect {
     this.actions$.pipe(
       ofType(registerAction),
       tap((data: any) => console.log(data)),
-      switchMap(({request}) => {
+      switchMap(({ request }) => {
         return this.authService.register(request).pipe(
           map((currentUser: CurrentUserInterface) => {
-            return registerSuccessAction({currentUser})
+            return registerSuccessAction({ currentUser })
           }),
-          catchError(() => {
-            return of(registerFailureAction())
+          catchError((errorResponse: HttpErrorResponse) => {
+            return of(
+              registerFailureAction({ errors: errorResponse.error.errors }),
+            )
           }),
         )
       }),
@@ -31,5 +34,5 @@ export class RegisterEffect {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-  ) {}
+  ) { }
 }
