@@ -1,12 +1,16 @@
-import {Component} from '@angular/core'
-import {FormBuilder, FormGroup, Validators} from '@angular/forms'
-import {Store, select} from '@ngrx/store'
-import {registerAction} from '../../store/actions/register.action'
-import {Observable} from 'rxjs'
-import {AppStateInterface} from '../../../../shared/models/appState.interface'
-import {isSubmittingSelector} from '../../store/selectors'
-import {AuthService} from '../../services/auth.service'
-import {RegisterRequestInterface} from '../../models/registerRequest.interface'
+import { Component } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Store, select } from '@ngrx/store'
+import { registerAction } from '../../store/actions/register.action'
+import { Observable } from 'rxjs'
+import { AppStateInterface } from '../../../../shared/models/appState.interface'
+import {
+  isSubmittingSelector,
+  validationErrorsSelector,
+} from '../../store/selectors'
+import { AuthService } from '../../services/auth.service'
+import { RegisterRequestInterface } from '../../models/registerRequest.interface'
+import { BackendErrorsInterface } from '../../../../shared/models/backendErrors.interface'
 
 @Component({
   selector: 'app-auth',
@@ -16,11 +20,13 @@ import {RegisterRequestInterface} from '../../models/registerRequest.interface'
 export class AuthComponent {
   form!: FormGroup
   isSubmitting$!: Observable<Boolean>
+  backendErrors$!: Observable<BackendErrorsInterface | null>
+
   constructor(
     private fb: FormBuilder,
     private store: Store<AppStateInterface>,
     private authService: AuthService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initializeForm()
@@ -29,6 +35,7 @@ export class AuthComponent {
 
   public initializeValues(): void {
     this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector))
+    this.backendErrors$ = this.store.pipe(select(validationErrorsSelector))
   }
 
   initializeForm(): void {
@@ -44,6 +51,6 @@ export class AuthComponent {
       user: this.form.value,
     }
 
-    this.store.dispatch(registerAction({request}))
+    this.store.dispatch(registerAction({ request }))
   }
 }
