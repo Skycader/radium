@@ -11,5 +11,7 @@
       [(ngModel)]="currentCommentId"
     />
   </div>
-  <div class="comment">{{ currentComment$ | async | json }}</div>
+  <div class="comment">
+    <pre>{{ currentComment$ | async | json }}</pre>
+  </div>
 </div>
