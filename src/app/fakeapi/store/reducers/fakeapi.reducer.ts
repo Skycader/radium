@@ -17,7 +17,7 @@ const fakeApi = createReducer(
     getCommentAction,
     (state, action): FakeApiStateInterface => ({
       ...state,
-      currentCommentId: action.commentId,
+      currentCommentId: getNumber(),
     }),
   ),
   on(
@@ -31,10 +31,15 @@ const fakeApi = createReducer(
     getCommentFailureAction,
     (state, action): FakeApiStateInterface => ({
       ...state,
-      currentCommentId: null,
+      currentCommentId: 55,
     }),
   ),
 )
+
+function getNumber() {
+  console.log('returning 10')
+  return 10
+}
 
 export function fakeApiReducer(state: FakeApiStateInterface, action: Action) {
   return fakeApi(state, action)

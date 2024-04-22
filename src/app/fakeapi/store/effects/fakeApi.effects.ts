@@ -1,6 +1,6 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { FakeapiService } from '../../services/fakeapi.service'
-import { catchError, map, of, switchMap } from 'rxjs'
+import { catchError, map, of, switchMap, tap } from 'rxjs'
 import {
   getCommentAction,
   getCommentFailureAction,
@@ -11,11 +11,13 @@ import { Injectable } from '@angular/core'
 import { CommentInterface } from '../../models/fakeapi.interface'
 
 @Injectable()
-export class RegisterEffect {
-  register$ = createEffect(() =>
+export class FakeApiEffect {
+  getCommentEffect$ = createEffect(() =>
     this.actions$.pipe(
+      tap((lol: any) => console.log('lol:', lol)),
       ofType(getCommentAction),
       switchMap(({ commentId }) => {
+        console.log('effect')
         return this.fakeApiService.getComment(commentId).pipe(
           map((comment: CommentInterface) => {
             return getCommentSuccessAction({ comment })
