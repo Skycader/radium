@@ -1,0 +1,21 @@
+.container-x {
+  .form-group {
+    display: flex;
+    gap: 10px;
+  }
+
+  .get-comment {
+    width: 100%;
+  }
+  width: 90%;
+  margin: 50px;
+  border: 1px solid grey;
+  padding: 10px;
+
+  .comment {
+    margin-top: 40px;
+    width: 100%;
+    min-height: 100px;
+    border: 2px dashed grey;
+  }
+}
