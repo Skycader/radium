@@ -13,11 +13,11 @@ import { RegisterRequestInterface } from '../../models/registerRequest.interface
 import { BackendErrorsInterface } from '../../../../shared/models/backendErrors.interface'
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrl: './auth.component.scss',
+  selector: 'rd-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrl: './sign-up.component.scss',
 })
-export class AuthComponent {
+export class SignUpComponent {
   form!: FormGroup
   isSubmitting$!: Observable<Boolean>
   backendErrors$!: Observable<BackendErrorsInterface | null>

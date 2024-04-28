@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { AuthComponent } from './components/auth/auth.component'
 import { RouterModule, Routes } from '@angular/router'
 import { ReactiveFormsModule } from '@angular/forms'
 import { StoreModule } from '@ngrx/store'
@@ -9,16 +8,22 @@ import { EffectsModule } from '@ngrx/effects'
 import { RegisterEffect } from './store/effects/register.effect'
 import { HttpClientModule } from '@angular/common/http'
 import { BackendErrorMessagesModule } from '../shared/backend-error-messages/backend-error-messages.module'
+import { SignInComponent } from './components/sign-in/sign-in.component'
+import { SignUpComponent } from './components/sign-up/sign-up.component'
 
 const routes: Routes = [
   {
-    path: 'auth',
-    component: AuthComponent,
+    path: 'sign-up',
+    component: SignUpComponent,
+  },
+  {
+    path: 'sign-in',
+    component: SignInComponent,
   },
 ]
 
 @NgModule({
-  declarations: [AuthComponent],
+  declarations: [SignInComponent, SignUpComponent],
   imports: [
     CommonModule,
     HttpClientModule,
