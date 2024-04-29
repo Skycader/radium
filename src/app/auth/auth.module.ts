@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { BackendErrorMessagesModule } from '../shared/backend-error-messages/backend-error-messages.module'
 import { SignInComponent } from './components/sign-in/sign-in.component'
 import { SignUpComponent } from './components/sign-up/sign-up.component'
+import { LoginEffect } from './store/effects/login.effect'
 
 const routes: Routes = [
   {
@@ -30,7 +31,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('auth', reducer),
-    EffectsModule.forFeature([RegisterEffect]),
+    EffectsModule.forFeature([RegisterEffect, LoginEffect]),
     BackendErrorMessagesModule,
   ],
 })

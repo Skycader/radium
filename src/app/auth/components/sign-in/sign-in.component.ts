@@ -1,16 +1,17 @@
-import { Component } from '@angular/core'
-import { Observable } from 'rxjs'
-import { BackendErrorsInterface } from '../../../../shared/models/backendErrors.interface'
-import { AppStateInterface } from '../../../../shared/models/appState.interface'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { Store, select } from '@ngrx/store'
-import { AuthService } from '../../services/auth.service'
-import { RegisterRequestInterface } from '../../models/registerRequest.interface'
-import { registerAction } from '../../store/actions/register.action'
+import {Component} from '@angular/core'
+import {Observable} from 'rxjs'
+import {BackendErrorsInterface} from '../../../../shared/models/backendErrors.interface'
+import {AppStateInterface} from '../../../../shared/models/appState.interface'
+import {FormBuilder, FormGroup, Validators} from '@angular/forms'
+import {Store, select} from '@ngrx/store'
+import {AuthService} from '../../services/auth.service'
+import {RegisterRequestInterface} from '../../models/registerRequest.interface'
+import {registerAction} from '../../store/actions/register.action'
 import {
   isSubmittingSelector,
   validationErrorsSelector,
 } from '../../store/selectors'
+import {loginAction} from '../../store/actions/login.action'
 
 @Component({
   selector: 'rd-sign-in',
@@ -26,7 +27,7 @@ export class SignInComponent {
     private fb: FormBuilder,
     private store: Store<AppStateInterface>,
     private authService: AuthService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initializeForm()
@@ -51,6 +52,6 @@ export class SignInComponent {
       user: this.form.value,
     }
 
-    this.store.dispatch(registerAction({ request }))
+    this.store.dispatch(loginAction({request}))
   }
 }
