@@ -1,9 +1,9 @@
-import { Action, createReducer, on } from '@ngrx/store'
-import { CounterStateInterface } from '../../models/counter.model'
-import { incrementAction } from '../actions/increment.action'
-import { decrementAction } from '../actions/decrement.action'
+import {Action, createReducer, on} from '@ngrx/store'
+import {CounterStateInterface} from '../../models/counter.model'
+import {incrementAction} from '../actions/increment.action'
+import {decrementAction} from '../actions/decrement.action'
 
-const initialState: CounterStateInterface = {
+export const initialState: CounterStateInterface = {
   value: 0,
 }
 

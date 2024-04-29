@@ -2,6 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing'
 
 import {CounterComponent} from './counter.component'
 import {provideMockStore} from '@ngrx/store/testing'
+import {By} from '@angular/platform-browser'
 
 describe('CounterComponent', () => {
   let component: CounterComponent
