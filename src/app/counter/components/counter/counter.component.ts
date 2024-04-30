@@ -15,11 +15,20 @@ export class CounterComponent {
 
   constructor(private store: Store<AppStateInterface>) { }
 
-  public increment() {
+  public dispatchIncrement() {
     this.store.dispatch(incrementAction())
   }
 
-  public decrement() {
+  public dispatchDecrement() {
     this.store.dispatch(decrementAction())
+  }
+
+  public value = 0
+  public increment() {
+    this.value++
+  }
+
+  public decrement() {
+    this.value--
   }
 }

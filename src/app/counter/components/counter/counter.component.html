@@ -1,5 +1,16 @@
+<div class="container">NgRx Counter</div>
+
+<div class="counter">
+  <button id="ngrx-decrement-btn" (click)="dispatchDecrement()">-</button>
+  <div id="ngrx-counter-value">{{ value$ | async }}</div>
+  <button id="ngrx-increment-btn" (click)="dispatchIncrement()">+</button>
+</div>
+
+<hr />
+
+<div class="container">Simple Counter</div>
 <div class="counter">
   <button id="decrement-btn" (click)="decrement()">-</button>
-  <div id="counter-value">{{ value$ | async }}</div>
+  <div id="counter-value">{{ value }}</div>
   <button id="increment-btn" (click)="increment()">+</button>
 </div>
