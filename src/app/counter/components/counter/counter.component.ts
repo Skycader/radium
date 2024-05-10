@@ -4,6 +4,7 @@ import { counterValueSelector } from '../../store/selectors/counter.selector'
 import { incrementAction } from '../../store/actions/increment.action'
 import { decrementAction } from '../../store/actions/decrement.action'
 import { AppStateInterface } from '../../../../shared/models/appState.interface'
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'app-counter',
@@ -11,7 +12,9 @@ import { AppStateInterface } from '../../../../shared/models/appState.interface'
   styleUrl: './counter.component.scss',
 })
 export class CounterComponent {
-  public value$ = this.store.pipe(select(counterValueSelector))
+  public value$: Observable<number> = this.store.pipe(
+    select(counterValueSelector),
+  )
 
   constructor(private store: Store<AppStateInterface>) { }
 

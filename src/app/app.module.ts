@@ -11,12 +11,16 @@ import { environment } from '../environments/environment'
 import { CounterModule } from './counter/counter.module'
 import { EffectsModule } from '@ngrx/effects'
 import { FakeapiModule } from './fakeapi/fakeapi.module'
+import { TopbarModule } from './shared/topbar/topbar.module'
+import { MainModule } from './main/main.module'
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MainModule,
+    TopbarModule,
     AuthModule,
     CounterModule,
     FakeapiModule,
