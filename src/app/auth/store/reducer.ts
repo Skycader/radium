@@ -1,5 +1,5 @@
-import { Action, createReducer, on } from '@ngrx/store'
-import { AuthStateInterface } from '../models/authState.interface'
+import {Action, createReducer, on} from '@ngrx/store'
+import {AuthStateInterface} from '../models/authState.interface'
 import {
   registerAction,
   registerSuccessAction,
@@ -10,10 +10,16 @@ import {
   loginFailureAction,
   loginSuccessAction,
 } from './actions/login.action'
+import {
+  getUserAction,
+  getUserFailureAction,
+  getUserSuccessAction,
+} from './actions/getUser.action'
 
 const initialState: AuthStateInterface = {
   isSubmitting: false,
   currentUser: null,
+  isLoading: false,
   isLoggedIn: null,
   validationErrors: null,
 }
@@ -69,6 +75,29 @@ const authReducer = createReducer(
       ...state,
       isSubmitting: false,
       validationErrors: action.errors,
+    }),
+  ),
+  on(
+    getUserAction,
+    (state, action): AuthStateInterface => ({
+      ...state,
+      isLoading: true,
+    }),
+  ),
+  on(
+    getUserSuccessAction,
+    (state, action): AuthStateInterface => ({
+      ...state,
+      isLoading: false,
+      currentUser: action.currentUser,
+    }),
+  ),
+  on(
+    getUserFailureAction,
+    (state, action): AuthStateInterface => ({
+      ...state,
+      isLoading: false,
+      currentUser: null,
     }),
   ),
 )

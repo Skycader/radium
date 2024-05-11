@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core'
+import {Injectable} from '@angular/core'
 
 @Injectable({
   providedIn: 'root',
 })
 export class PersistanceService {
-  constructor() { }
+  constructor() {}
 
   set(key: string, data: any): void {
     try {

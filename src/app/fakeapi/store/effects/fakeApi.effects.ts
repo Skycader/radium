@@ -1,26 +1,24 @@
-import { Actions, createEffect, ofType } from '@ngrx/effects'
-import { FakeapiService } from '../../services/fakeapi.service'
-import { catchError, map, of, switchMap, tap } from 'rxjs'
+import {Actions, createEffect, ofType} from '@ngrx/effects'
+import {FakeapiService} from '../../services/fakeapi.service'
+import {catchError, map, of, switchMap, tap} from 'rxjs'
 import {
   getCommentAction,
   getCommentFailureAction,
   getCommentSuccessAction,
 } from '../actions/getComment.action'
-import { HttpErrorResponse } from '@angular/common/http'
-import { Injectable } from '@angular/core'
-import { CommentInterface } from '../../models/fakeapi.interface'
+import {HttpErrorResponse} from '@angular/common/http'
+import {Injectable} from '@angular/core'
+import {CommentInterface} from '../../models/fakeapi.interface'
 
 @Injectable()
 export class FakeApiEffect {
   getCommentEffect$ = createEffect(() =>
     this.actions$.pipe(
-      tap((lol: any) => console.log('lol:', lol)),
       ofType(getCommentAction),
-      switchMap(({ commentId }) => {
-        console.log('effect')
+      switchMap(({commentId}) => {
         return this.fakeApiService.getComment(commentId).pipe(
           map((comment: CommentInterface) => {
-            return getCommentSuccessAction({ comment })
+            return getCommentSuccessAction({comment})
           }),
           catchError((errorResponse: HttpErrorResponse) => {
             return of(getCommentFailureAction())
@@ -33,5 +31,5 @@ export class FakeApiEffect {
   constructor(
     private actions$: Actions,
     private fakeApiService: FakeapiService,
-  ) { }
+  ) {}
 }
