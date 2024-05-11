@@ -89,6 +89,7 @@ const authReducer = createReducer(
     (state, action): AuthStateInterface => ({
       ...state,
       isLoading: false,
+      isLoggedIn: true,
       currentUser: action.currentUser,
     }),
   ),
@@ -97,6 +98,7 @@ const authReducer = createReducer(
     (state, action): AuthStateInterface => ({
       ...state,
       isLoading: false,
+      isLoggedIn: false,
       currentUser: null,
     }),
   ),
