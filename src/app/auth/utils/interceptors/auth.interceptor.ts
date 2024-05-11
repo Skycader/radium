@@ -17,14 +17,13 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     const token = this.persistance.get('accessToken')
-    const newReq = req.clone({
-      url: 'https://api.realworld.io/api/user',
+    req = req.clone({
       setHeaders: {
         authorization: token ? `Token ${token}` : '',
         Bearer: token ? `Token ${token}` : '',
       },
     })
 
-    return next.handle(newReq)
+    return next.handle(req)
   }
 }
