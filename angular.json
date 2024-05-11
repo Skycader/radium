@@ -74,7 +74,8 @@
               "buildTarget": "radium:build:production"
             },
             "development": {
-              "buildTarget": "radium:build:development"
+              "buildTarget": "radium:build:development",
+              "proxyConfig": "src/dev.proxy.json"
             }
           },
           "defaultConfiguration": "development"

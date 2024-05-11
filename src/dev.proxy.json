@@ -1,0 +1,6 @@
+{
+  "api/*": {
+    "target": "https://conduit.productionready.io/api/user",
+    "secure": false
+  }
+}

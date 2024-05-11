@@ -6,7 +6,7 @@ import {StoreModule} from '@ngrx/store'
 import {reducer} from './store/reducer'
 import {EffectsModule} from '@ngrx/effects'
 import {RegisterEffect} from './store/effects/register.effect'
-import {HttpClientModule} from '@angular/common/http'
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 import {BackendErrorMessagesModule} from '../shared/backend-error-messages/backend-error-messages.module'
 import {SignInComponent} from './components/sign-in/sign-in.component'
 import {SignUpComponent} from './components/sign-up/sign-up.component'
@@ -35,5 +35,6 @@ const routes: Routes = [
     EffectsModule.forFeature([RegisterEffect, LoginEffect, GetUserEffect]),
     BackendErrorMessagesModule,
   ],
+  providers: [],
 })
 export class AuthModule {}
