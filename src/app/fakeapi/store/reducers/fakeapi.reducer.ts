@@ -37,7 +37,7 @@ const fakeApi = createReducer(
 )
 
 function getNumber() {
-  console.log('returning 10')
+  // console.log('returning 10')
   return 10
 }
 

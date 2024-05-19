@@ -11,10 +11,12 @@ import { EffectsModule, EffectsRootModule } from '@ngrx/effects'
 import { FakeApiEffect } from '../../store/effects/fakeApi.effects'
 import { FakeapiService } from '../../services/fakeapi.service'
 import { HttpClientModule } from '@angular/common/http'
+import { first } from 'rxjs'
 
 describe('FakeapiComponent', () => {
   let component: FakeapiComponent
   let fixture: ComponentFixture<FakeapiComponent>
+  let service: FakeApiEffect
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -27,10 +29,12 @@ describe('FakeapiComponent', () => {
         EffectsModule.forFeature([FakeApiEffect]),
       ],
       declarations: [FakeapiComponent],
+      providers: [FakeApiEffect],
     }).compileComponents()
 
     fixture = TestBed.createComponent(FakeapiComponent)
     component = fixture.componentInstance
+    service = TestBed.inject(FakeApiEffect)
     fixture.detectChanges()
   })
 
@@ -38,8 +42,11 @@ describe('FakeapiComponent', () => {
     expect(component).toBeTruthy()
   })
 
-  it('should get comment by clicking on the get comment btn', async () => {
+  /**  xit('should get comment by clicking on the get comment btn', async () => {
     let getCommentBtn = fixture.debugElement.query(By.css('#get-comment'))
+    service.getCommentEffect$.subscribe((res: any) => {
+      console.log('hello from test', res)
+    })
     getCommentBtn.nativeElement.click()
     fixture.detectChanges()
 
@@ -54,5 +61,21 @@ describe('FakeapiComponent', () => {
     fixture.detectChanges()
 
     expect(email.nativeElement.textContent).toBe('Eliseo@gardner.biz')
+  }) */
+
+  it('should get comment by clicking on the get comment btn', (done) => {
+    let getCommentBtn = fixture.debugElement.query(By.css('#get-comment'))
+    service.getCommentEffect$.subscribe((res: any) => {
+      fixture.detectChanges()
+
+      let email = fixture.debugElement.query(By.css('#email'))
+      console.log(res.comment.postId)
+
+      expect(email.nativeElement.textContent).toBe('Eliseo@gardner.biz')
+      //###expect(res.comment.postId).toBe(1)
+      done()
+    })
+    getCommentBtn.nativeElement.click()
+    fixture.detectChanges()
   })
 })
