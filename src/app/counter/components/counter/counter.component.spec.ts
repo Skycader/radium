@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { CounterComponent } from './counter.component'
-import { provideMockStore } from '@ngrx/store/testing'
 import { By } from '@angular/platform-browser'
 import { StoreModule } from '@ngrx/store'
 import { counterReducer } from '../../store/reducers/counter.reducer'
@@ -43,6 +42,16 @@ describe('CounterComponent', () => {
     fixture.detectChanges()
 
     expect(counterValue.nativeElement.textContent).toBe('1')
+  })
+
+  it('should increase the NGRX counter value by -100 on x100 click the decrease button', () => {
+    let counterValue = fixture.debugElement.query(By.css('#ngrx-counter-value'))
+    let incrementBtn = fixture.debugElement.query(By.css('#ngrx-decrement-btn'))
+
+    for (let i = 0; i < 100; i++) incrementBtn.nativeElement.click()
+    fixture.detectChanges()
+
+    expect(counterValue.nativeElement.textContent).toBe('-100')
   })
 
   it('should have counter value as 0 in the start position', () => {
