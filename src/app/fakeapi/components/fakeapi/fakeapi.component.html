@@ -15,7 +15,7 @@
       [(ngModel)]="currentCommentId"
     />
   </div>
-  <div class="comment">
+  <div class="comment" *ngIf="currentComment$ | async">
     <span
       class="badge d-flex align-items-center p-1 pe-2 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-pill"
     >
