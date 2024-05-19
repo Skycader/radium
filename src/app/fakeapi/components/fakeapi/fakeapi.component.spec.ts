@@ -23,10 +23,9 @@ describe('FakeapiComponent', () => {
         FormsModule,
         StoreModule.forRoot({}),
         StoreModule.forFeature('fakeApi', fakeApiReducer),
-        EffectsModule.forRoot([FakeApiEffect]),
+        EffectsModule.forRoot([]),
         EffectsModule.forFeature([FakeApiEffect]),
       ],
-      providers: [FakeApiEffect, FakeapiService],
       declarations: [FakeapiComponent],
     }).compileComponents()
 
